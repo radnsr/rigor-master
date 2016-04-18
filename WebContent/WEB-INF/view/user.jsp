@@ -104,15 +104,18 @@
 							<td><span ng-bind="u.emp_no"></span></td>
 							<td><span ng-bind="u.email"></span></td>
 							<td><span ng-bind="u.role"></span></td>
-							<td><span ng-if="u.status==1" style="color: #0f9d58;">Active</span>
+							<td>
+							<span ng-if="u.status==2" style="color: #ff8000;">Fresh</span>
+							<span ng-if="u.status==1" style="color: #0f9d58;">Active</span>
 								<span style="color: rgb(253, 65, 64)" ng-if="u.status==0">Inactive</span></td>
 							<td><md-button type="button" ng-click="edit(u.user_id)"
 									class="md-raised">Edit</md-button></td>
 							<td><md-button ng-if="u.status==1" class="md-raised md-warn"
 									type="button" ng-click="deactivate(u.user_id)">Deactivate</md-button>
 
-								<md-button ng-if="u.status==0" type="button"
-									class="md-raised md-primary" ng-click="activate(u.user_id)">Activate</md-button></td>
+								<md-button ng-if="u.status !=1" type="button"
+									class="md-raised md-primary" ng-click="activate(u.user_id)">Activate</md-button>
+									</td>
 						</tr>
 					</tbody>
 				</table>

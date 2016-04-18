@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rigor.util.Methods;
+
 @RestController
 @RequestMapping("/")
 public class IndexController {
@@ -34,6 +36,11 @@ public class IndexController {
 	public ModelAndView Index(){
 		
 		return new ModelAndView("index");
+	}
+	@RequestMapping("/fresh")
+	public ModelAndView FreshLogin(){
+		
+		return new ModelAndView("fresh_login");
 	}
 
 }

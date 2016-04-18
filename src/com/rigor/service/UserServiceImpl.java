@@ -32,8 +32,9 @@ public class UserServiceImpl implements UserService {
 			session.beginTransaction();
 			model_new = model;
 			Methods method = new Methods();
+			model.setPassword(method.RandomCode());
 			model_new.setUser_id(method.generateID(session, "U", "user_id", User.class));
-			model_new.setStatus(1);
+			model_new.setStatus(2);
 			session.save(model_new);
 
 			session.getTransaction().commit();

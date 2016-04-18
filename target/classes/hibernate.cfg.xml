@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping resource="com/rigor/model/Department.hbm.xml" />
 		<mapping resource="com/rigor/model/User.hbm.xml" />
 	</session-factory>
