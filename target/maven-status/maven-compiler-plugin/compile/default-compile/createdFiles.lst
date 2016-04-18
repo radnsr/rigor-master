@@ -1,0 +1,14 @@
+com\rigor\configuration\CORSFilter.class
+com\rigor\util\HibernateUtilities.class
+com\rigor\configuration\RigorInitializer.class
+com\rigor\util\Methods.class
+com\rigor\service\UserServiceImpl.class
+com\rigor\controller\IndexController.class
+com\rigor\service\DeptServiceImpl.class
+com\rigor\model\User.class
+com\rigor\service\UserService.class
+com\rigor\controller\UserController.class
+com\rigor\model\Department.class
+com\rigor\controller\DeptController.class
+com\rigor\service\DeptService.class
+com\rigor\configuration\RigorConfiguration.class
