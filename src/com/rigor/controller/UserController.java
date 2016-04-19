@@ -40,9 +40,12 @@ public class UserController {
 		if (user == null) {
 			session.setAttribute("error", "Email or Password is wrong!!!");
 			return new ModelAndView("index");
-
 		}
-
+		
+		if(user.getStatus()==2 ){
+			session.setAttribute("user_fresh", user);
+			return new ModelAndView("fresh_login");	
+		}
 		session.setAttribute("user", user);
 		return new ModelAndView("dashboard");
 	}
@@ -133,6 +136,27 @@ public class UserController {
 		service.activate(id);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	// ------------------- Update Password----------------------
+
+	@RequestMapping(value = "/user_password/", method = RequestMethod.POST)
+	public ModelAndView updatePassword(@RequestParam(value = "user_id") String id,@RequestParam(value = "password") String password,HttpSession session) {
+		System.out.println("Updating User " + id );
+
+		User currentModel = service.findById(id);
+
+		if (currentModel == null) {
+			System.out.println("id = " + id + " not found");
+			
+			return new ModelAndView("dashboard");
+		}
+		System.out.println("Current User " + currentModel);
+		currentModel.setPassword(password);
+		currentModel.setStatus(1);
+
+		service.updateDept(currentModel);
+		session.setAttribute("user", currentModel);
+		return new ModelAndView("dashboard");
 	}
 
 }

@@ -19,5 +19,6 @@ public interface UserService {
 	void activate(String id);
 	
 	public User authenticate(User user); 
+	
 
 }
