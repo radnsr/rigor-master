@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 15, 2013 2:53:22 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.rigor.model.Feedback" table="feedback_tbl">
+        <id name="feedback_id" type="java.lang.String">
+        </id>
+        <property name="feedback_type" type="java.lang.String">
+        </property>
+        <property name="user_id" type="java.lang.String">
+        </property>
+        <property name="category_id" type="java.lang.String">
+        </property>
+        <property name="date" type="java.sql.Date">
+        </property>
+        <property name="dept_id" type="java.lang.String">
+        </property>
+        <property name="description" type="java.lang.String">
+        </property>
+        <property name="status" type="int">
+        </property>
+    </class>
+</hibernate-mapping>

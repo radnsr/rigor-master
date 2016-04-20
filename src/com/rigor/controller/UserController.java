@@ -115,7 +115,7 @@ public class UserController {
 		currentModel.setRole(model.getRole());
 		currentModel.setEmp_no(model.getEmp_no());
 
-		service.updateDept(currentModel);
+		service.update(currentModel);
 		return new ResponseEntity<User>(currentModel, HttpStatus.OK);
 	}
 
@@ -154,7 +154,7 @@ public class UserController {
 		currentModel.setPassword(password);
 		currentModel.setStatus(1);
 
-		service.updateDept(currentModel);
+		service.update(currentModel);
 		session.setAttribute("user", currentModel);
 		return new ModelAndView("dashboard");
 	}

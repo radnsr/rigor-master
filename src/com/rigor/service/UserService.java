@@ -10,7 +10,7 @@ public interface UserService {
 
 	public List<User> getAllData();
 
-	void updateDept(User model);
+	void update(User model);
 
 	User findById(String id);
 

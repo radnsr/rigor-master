@@ -27,6 +27,11 @@ public class IndexController {
 		
 		return new ModelAndView( "master_dept");
 	}
+	@RequestMapping("/master_category")
+	public ModelAndView MasterCategory(){
+		
+		return new ModelAndView( "master_category");
+	}
 	@RequestMapping("/error")
 	public ModelAndView errorLogin(){
 		

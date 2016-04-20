@@ -15,28 +15,43 @@
 		<%@ include file="header.jsp"%>
 
 
-		<div ng-controller="DeptCtrl as ctrl" layout="row" layout-wrap>
+		<div ng-controller="CategoryCtrl" layout="row" layout-wrap>
 
 			<div flex="25"></div>
 
 			<div flex="50">
 				<md-card>
-				<h2 style="text-align: center">Department Master <hr /></h2>
-				<form ng-submit="ctrl.submit()" name="deptForm">
+				<h2 style="text-align: center">
+					Category Master
+					<hr />
+				</h2>
+				<form ng-submit="submit()" name="categoryForm">
 					<md-input-container class="md-block"> <label>
-						Department ID</label> <input
-						type="{{!ctrl.dept.dept_id ? 'text' : 'text'}}" readonly
-						name="dept_id" ng-model="ctrl.dept.dept_id"> </md-input-container>
+						Category ID</label> <input
+						type="{{!category.category_id ? 'text' : 'text'}}" readonly
+						name="category_id" ng-model="category.category_id"> </md-input-container>
+
+					<label style="color: rgb(204, 204, 204);">Department :</label>
+					<md-select ng-model="category.dept_id" name="dept_id" required placeholder="Select a department"> <md-option
+						ng-repeat="dept in dept_list" value="{{dept.id}}" class="md-primary">
+					{{dept.name}} </md-option> </md-select>
+					<div ng-messages="categoryForm.role.$error">
+						<div ng-message="required"
+							style="font-size: 12px; line-height: 24px;">This is
+							required.</div>
+					</div>
+					<br />
+
 					<md-input-container class="md-block"> <label>
-						Department Name</label> <input required name="dept_name"
-						ng-model="ctrl.dept.dept_name">
-					<div ng-messages="deptForm.name.$error">
+						Category Name</label> <input required name="category_name"
+						ng-model="category.category_name">
+					<div ng-messages="categoryForm.category_name.$error">
 						<div ng-message="required">This is required.</div>
 					</div>
 					</md-input-container>
-					<md-button type="button" ng-click="ctrl.reset()">Reset</md-button>
+					<md-button type="button" ng-click="reset()">Reset</md-button>
 					<md-button class="md-primary md-default-theme"
-						ng-disabled="deptForm.$invalid">{{!ctrl.dept.dept_id ?
+						ng-disabled="deptForm.$invalid">{{!dept.dept_id ?
 					'Add' : 'Update'}}</md-button>
 				</form>
 				</md-card>
@@ -96,8 +111,9 @@
 	<%@include file="table-sources.jsp"%>
 
 
-	<script src="<c:url value='/assets/js/controller/dept_controller.js' />"></script>
-	<script src="<c:url value='/assets/js/service/dept_service.js' />"></script>
+	<script
+		src="<c:url value='/assets/js/controller/category_controller.js' />"></script>
+	<script src="<c:url value='/assets/js/service/category_service.js' />"></script>
 
 
 

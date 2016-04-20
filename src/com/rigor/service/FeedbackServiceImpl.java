@@ -8,32 +8,31 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rigor.model.Department;
-import com.rigor.model.User;
+import com.rigor.model.Feedback;
 import com.rigor.util.HibernateUtilities;
 import com.rigor.util.Methods;
 
-@Service("userService")
+@Service("feedbackService")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class FeedbackServiceImpl implements FeedbackService {
 	SessionFactory sessionFactory = null;
 
-	public UserServiceImpl() {
+	public FeedbackServiceImpl() {
 		sessionFactory = HibernateUtilities.getSessionFactory();
 
 	}
 
-	public User save(User model) {
+	// ------------Save Feedback master data----------------------
+	public Feedback save(Feedback model) {
 
-		User model_new = new User();
+		Feedback model_new = new Feedback();
 		Session session = sessionFactory.openSession();
 
 		try {
 			session.beginTransaction();
 			model_new = model;
 			Methods method = new Methods();
-			model.setPassword(method.RandomCode());
-			model_new.setUser_id(method.generateID(session, "U", "user_id", User.class));
+			model_new.setFeedback_id(method.generateID(session, "F", "feedback_id", Feedback.class));
 			model_new.setStatus(2);
 			session.save(model_new);
 
@@ -47,14 +46,14 @@ public class UserServiceImpl implements UserService {
 
 		return model;
 	}
-
-	public List<User> getAllData() {
-		List<User> list = null;
+	// ------------Retrieve all feedback master data----------------------
+	public List<Feedback> getAllData() {
+		List<Feedback> list = null;
 		Session session = sessionFactory.openSession();
 
 		try {
 			session.beginTransaction();
-			list = session.createCriteria(User.class).list();
+			list = session.createCriteria(Feedback.class).list();
 			session.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,8 +63,8 @@ public class UserServiceImpl implements UserService {
 		}
 		return list;
 	}
-
-	public void update(User model) {
+	// ------------Update feedback master data----------------------
+	public void update(Feedback model) {
 		Session session = sessionFactory.openSession();
 
 		try {
@@ -82,25 +81,25 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
+	// ------------get single feedback master data----------------------
+	public Feedback findById(String id) {
+		List<Feedback> list = getAllData();
 
-	public User findById(String id) {
-		List<User> list = getAllData();
-
-		for (User model : list) {
-			if (model.getUser_id().equals(id)) {
+		for (Feedback model : list) {
+			if (model.getFeedback_id().equals(id)) {
 				return model;
 			}
 		}
 		return null;
 	}
-
+	// ------------Deactivate Feedback master data----------------------
 	public void deactivate(String id) {
 		Session session = sessionFactory.openSession();
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.User SET status=0 WHERE user_id = :user_id");
-			query.setParameter("user_id", id);
+			Query query = session.createQuery("UPDATE com.rigor.model.Feedback SET status=0 WHERE feedback_id = :feedback_id");
+			query.setParameter("feedback_id", id);
 			query.executeUpdate();
 
 			session.getTransaction().commit();
@@ -111,7 +110,7 @@ public class UserServiceImpl implements UserService {
 			session.close();
 		}
 	}
-
+	// ------------Activate Feedback master data----------------------
 	@Override
 	public void activate(String id) {
 
@@ -119,8 +118,8 @@ public class UserServiceImpl implements UserService {
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.User SET status=1 WHERE user_id = :user_id");
-			query.setParameter("user_id", id);
+			Query query = session.createQuery("UPDATE com.rigor.model.Feedback SET status=1 WHERE feedback_id = :feedback_id");
+			query.setParameter("feedback_id", id);
 			query.executeUpdate();
 
 			session.getTransaction().commit();
@@ -133,18 +132,5 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public User authenticate(User user) {
-		List<User> list = getAllData();
-
-		for (User model : list) {
-			if (model.getEmail().equals(user.getEmail()) && model.getPassword().equals(user.getPassword())) {
-				System.out.println(model.getEmail());
-				
-				return model;
-			}
-		}
-		return null;
-	}
 
 }

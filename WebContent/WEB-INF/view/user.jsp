@@ -18,9 +18,11 @@
 
 			<div flex="25"></div>
 
-			<div flex="60" >
+			<div flex="60">
 				<md-card>
-				<h2 style="text-align: center">User Registration<hr />	
+				<h2 style="text-align: center">
+					User Registration
+					<hr />
 				</h2>
 				<form ng-submit="submit()" name="userForm">
 					<md-input-container class="md-block"> <label>
@@ -33,14 +35,14 @@
 					</div>
 					</md-input-container>
 					<md-input-container class="md-block"> <label>
-						Employee Number</label> <input minlength="7" maxlength="7" type="number" required name="emp_no"
-						ng-model="user.emp_no">
+						Employee Number</label> <input minlength="7" maxlength="7" type="number"
+						required name="emp_no" ng-model="user.emp_no">
 					<div ng-messages="userForm.emp_no.$error">
 						<div ng-message="required">This is required.</div>
 						<div ng-message="number">This should be a number.</div>
 						<div ng-message="minlength">Length should be 7.</div>
 						<div ng-message="maxlength">Length should be 7.</div>
-						
+
 					</div>
 					</md-input-container>
 					<md-input-container class="md-block"> <label>
@@ -55,18 +57,21 @@
 
 					</div>
 					</md-input-container>
-					<md-input_container class="md-block"> <label>Role</label> <md-radio-group
-						ng-model="user.role" name="role" required> <md-radio-button
-						ng-repeat="r in role_option" value="{{r}}" class="md-primary">{{r}}</md-radio-button>
-					</md-radio-group>
+
+					<label style="color: rgb(204, 204, 204);">Role :</label>
+					<md-select ng-model="user.role" name="role" required placeholder="Select a role"> <md-option
+						ng-repeat="r in role_option" value="{{r}}" class="md-primary">
+					{{r}} </md-option> </md-select>
 					<div ng-messages="userForm.role.$error">
-						<div ng-message="required">This is required.</div>
-						</md-input-container>
+						<div ng-message="required"
+							style="font-size: 12px; line-height: 24px;">This is
+							required.</div>
 					</div>
+					<br />
 
 
-					<md-button type="button" ng-click="reset()">Reset</md-button> <md-button
-						class="md-primary md-default-theme"
+					<md-button type="button" ng-click="reset()">Reset</md-button>
+					<md-button class="md-primary md-default-theme"
 						ng-disabled="userForm.$invalid">{{!user.user_id ?
 					'Add' : 'Update'}}</md-button>
 				</form>
@@ -104,9 +109,8 @@
 							<td><span ng-bind="u.emp_no"></span></td>
 							<td><span ng-bind="u.email"></span></td>
 							<td><span ng-bind="u.role"></span></td>
-							<td>
-							<span ng-if="u.status==2" style="color: #ff8000;">Fresh</span>
-							<span ng-if="u.status==1" style="color: #0f9d58;">Active</span>
+							<td><span ng-if="u.status==2" style="color: #ff8000;">Fresh</span>
+								<span ng-if="u.status==1" style="color: #0f9d58;">Active</span>
 								<span style="color: rgb(253, 65, 64)" ng-if="u.status==0">Inactive</span></td>
 							<td><md-button type="button" ng-click="edit(u.user_id)"
 									class="md-raised">Edit</md-button></td>
@@ -115,7 +119,7 @@
 
 								<md-button ng-if="u.status !=1" type="button"
 									class="md-raised md-primary" ng-click="activate(u.user_id)">Activate</md-button>
-									</td>
+							</td>
 						</tr>
 					</tbody>
 				</table>
