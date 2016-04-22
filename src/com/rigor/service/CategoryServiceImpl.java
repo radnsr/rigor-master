@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rigor.model.Category;
+import com.rigor.model.Department;
 import com.rigor.util.HibernateUtilities;
 import com.rigor.util.Methods;
 
@@ -46,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 		return model;
 	}
+
 	// ------------Retrieve all category master data----------------------
 	public List<Category> getAllData() {
 		List<Category> list = null;
@@ -54,6 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
 		try {
 			session.beginTransaction();
 			list = session.createCriteria(Category.class).list();
+
 			session.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -63,6 +66,27 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return list;
 	}
+
+	// ------------Retrieve all category master data----------------------
+	public List<Category> getAllData2() {
+		List list = null;
+		Session session = sessionFactory.openSession();
+
+		try {
+			session.beginTransaction();
+			String hql = "FROM com.rigor.model.Category as cat INNER JOIN com.rigor.model.Department as dept WHERE cat.dept_id = dept.dept_id";
+			Query query = session.createQuery(hql);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return list;
+	}
+
 	// ------------Update category master data----------------------
 	public void update(Category model) {
 		Session session = sessionFactory.openSession();
@@ -81,6 +105,7 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 
 	}
+
 	// ------------get single category master data----------------------
 	public Category findById(String id) {
 		List<Category> list = getAllData();
@@ -92,13 +117,15 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return null;
 	}
+
 	// ------------Deactivate Category master data----------------------
 	public void deactivate(String id) {
 		Session session = sessionFactory.openSession();
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.Category SET status=0 WHERE category_id = :category_id");
+			Query query = session
+					.createQuery("UPDATE com.rigor.model.Category SET status=0 WHERE category_id = :category_id");
 			query.setParameter("category_id", id);
 			query.executeUpdate();
 
@@ -110,6 +137,7 @@ public class CategoryServiceImpl implements CategoryService {
 			session.close();
 		}
 	}
+
 	// ------------Activate Category master data----------------------
 	@Override
 	public void activate(String id) {
@@ -118,7 +146,8 @@ public class CategoryServiceImpl implements CategoryService {
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.Category SET status=1 WHERE category_id = :category_id");
+			Query query = session
+					.createQuery("UPDATE com.rigor.model.Category SET status=1 WHERE category_id = :category_id");
 			query.setParameter("category_id", id);
 			query.executeUpdate();
 
@@ -131,6 +160,5 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 
 	}
-
 
 }

@@ -5,9 +5,9 @@ App.factory('CategoryService', [
 		function($http, $q) {
 
 			return {
-				create : function(dept) {
+				create : function(data) {
 					return $http.post(
-							'http://localhost:8080/RigorProject/category/', dept)
+							'http://localhost:8080/RigorProject/category/', data)
 							.then(function(response) {
 								console.log(response);
 								return response.data;

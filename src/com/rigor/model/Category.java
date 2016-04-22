@@ -1,9 +1,11 @@
 package com.rigor.model;
 
+import java.util.Set;
+
 public class Category {
 	
 private String category_id;
-private String dept_id;
+private Set<Department> department;
 private String description; 
 private int status;
 
@@ -11,12 +13,18 @@ private int status;
 public Category(String category_id,String dept_id,String description,int status){
 	
 	this.category_id=category_id;
-	this.dept_id=dept_id;
 	this.description=description;
 	this.status=status;
 }
 public Category() {
 	// TODO Auto-generated constructor stub
+}
+
+public Set<Department> getDepartment() {
+	return department;
+}
+public void setDepartment(Set<Department> department) {
+	this.department = department;
 }
 public String getCategory_id() {
 	return category_id;
@@ -24,12 +32,7 @@ public String getCategory_id() {
 public void setCategory_id(String category_id) {
 	this.category_id = category_id;
 }
-public String getDept_id() {
-	return dept_id;
-}
-public void setDept_id(String dept_id) {
-	this.dept_id = dept_id;
-}
+
 public String getDescription() {
 	return description;
 }

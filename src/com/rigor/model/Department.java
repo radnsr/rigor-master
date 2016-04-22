@@ -1,13 +1,25 @@
 package com.rigor.model;
 
+import java.util.Set;
+
 public class Department {
 
 	private String dept_id;
 	private String dept_name;
 	private int status;
+	
+	private Set<Category> category;
 
 	public Department() {
 		//dept_id = "D0001";
+	}
+
+	public Set<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(Set<Category> category) {
+		this.category = category;
 	}
 
 	public String getDept_id() {

@@ -3,84 +3,88 @@ App.controller('CategoryCtrl', [
 		'$scope',
 		'CategoryService',
 		function($scope, CategoryService) {
-			var self = this;
-			self.dept = {
-				dept_id : '',
-				dept_name : '',
+			var $scope = this;
+			$scope.category = {
+				category_id : '',
+				dept_id:'',
+				description : ''
 			};
-			$scope.dept_list=[{id:'D001',name:'HR' },{id:'D002',name:'IT'}];
-			
+			$scope.dept='';
+			$scope.dept_option=[{id:'D0001',name:'HR' },{id:'D0002',name:'IT'}];
+			$scope.r_list=["Administrator" , "Manager", "Employee" ];
 			$scope.pageSize=3;
-			self.depts = [];
-			// ------------Fetch all Department master data--------------
-			self.fetchAllDepts = function() {
-				DeptService.fetchAllDepts().then(function(d) {
-					self.depts = d;
+			$scope.categories = [];
+			// ------------Fetch all Category master data--------------
+			$scope.fetchAllData = function() {
+				CategoryService.fetchAllData().then(function(d) {
+					$scope.categories = d;
 				}, function(errResponse) {
-					console.error('Error while fetching Depts');
+					console.error('Error while fetching Categories');
 				});
 			};
 
-			// ------------Create new Department master data--------------
-			self.createDept = function(dept) {
+			// ------------Create new Category master data--------------
+			$scope.create = function(category) {
 
-				DeptService.createDept(dept).then(self.fetchAllDepts,
+				CategoryService.create(category).then($scope.fetchAllData,
 						function(errResponse) {
 
 							console.log(errResponse.data);
 						});
 			};
-			self.fetchAllDepts();// execute the function when page loading
-			// ------------Submit form in master_dept.jsp--------------
-			self.submit = function() {
+			$scope.fetchAllData();// execute the function when page loading
+			// ------------Submit form in master_category.jsp--------------
+			$scope.submit = function() {
 
-				if (self.dept.dept_id == '') {
-					console.log('Saving New User', self.dept);
-					self.createDept(self.dept);
+				if ($scope.category.category_id == '') {
+					console.log('Saving New User', $scope.category);
+					$scope.createDept($scope.category);
 
 				} else {
-					self.updateDept(self.dept, self.dept.dept_id);
-					console.log('User updated with id ', self.dept.dept_id);
+					$scope.update($scope.category, $scope.category.category_id);
+					console.log('User updated with id ', $scope.category.category_id);
 				}
 
-				self.reset();
+				$scope.reset();
 			};
-			// ------------Reset form in master_dept.jsp-------------
-			self.reset = function() {
-				self.dept = {
-					dept_id : '',
-					dept_name : '',
+			// ------------Reset form in master_category.jsp-------------
+			$scope.reset = function() {
+				$scope.category = {
+					category_id : '',
+					dept_id:'',
+					description : ''
 				};
-				$scope.deptForm.$setPristine(); // reset Form
+				alert("sda");
+				$scope.categoryForm.$setPristine(); // reset Form
 			};
 
 			// ------------Update department master data-------------
-			self.updateDept = function(dept, id) {
-				DeptService.updateDept(dept, id).then(self.fetchAllDepts,
+			$scope.update = function(category, id) {
+				CategoryService.update(category, id).then($scope.fetchAllData,
 						function(errResponse) {
 							console.error('Error while updating User.');
 						});
 			};
 			// ------------Deactvaite department master data-------------
-			self.deactivateDept = function(id) {
-				DeptService.deactivateDept(id).then(self.fetchAllDepts,
+			$scope.deactivate = function(id) {
+				CategoryService.deactivate(id).then($scope.fetchAllData,
 						function(errResponse) {
-					console.error('Error while deactivating dept.');
+					console.error('Error while deactivating category.');
 				});
 			};
 			// ------------Deactvaite department master data-------------
-			self.activateDept = function(id) {
-				DeptService.activateDept(id).then(self.fetchAllDepts,
+			$scope.activate = function(id) {
+				CategoryService.activate(id).then($scope.fetchAllData,
 						function(errResponse) {
-					console.error('Error while deactivating dept.');
+					console.error('Error while deactivating category.');
 				});
 			};
-			// Edit the form in master_dept.jsp
-			self.edit = function(id) {
+			// Edit the form in master_category.jsp
+			$scope.edit = function(id) {
 				console.log('id to be edited', id);
-				for (var i = 0; i < self.depts.length; i++) {
-					if (self.depts[i].dept_id == id) {
-						self.dept = angular.copy(self.depts[i]);
+				for (var i = 0; i < $scope.categories.length; i++) {
+					if ($scope.categories[i].category_id == id) {
+						$scope.category = angular.copy($scope.categories[i]);
 						break;
 					}
 				}

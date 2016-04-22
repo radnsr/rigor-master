@@ -77,7 +77,7 @@ public class CategoryController {
 		}
 
 		currentModel.setDescription(model.getDescription());
-		currentModel.setDept_id(model.getDept_id());
+		currentModel.setDepartment(model.getDepartment());
 		
 
 		service.update(currentModel);

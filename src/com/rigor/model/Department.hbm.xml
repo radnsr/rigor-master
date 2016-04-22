@@ -3,13 +3,27 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jul 15, 2013 2:53:22 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.rigor.model.Department" table="dept_tbl">
-        <id name="dept_id" type="java.lang.String">
-        </id>
-        <property name="dept_name" type="java.lang.String">
-        </property>
-        <property name="status" type="int">
-        </property>
-     
-    </class>
+	<class name="com.rigor.model.Department" table="dept_tbl">
+		<id name="dept_id" type="java.lang.String">
+		<column name="DEPT_ID"></column>
+		</id>
+		<property name="dept_name" type="java.lang.String"><column name="DEPT_NAME"></column>
+		</property>
+		<property name="status" type="int"><column name="STATUS"></column>
+		</property>
+		<set name="category" table="category_tbl" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="DEPT_ID" not-null="true" />
+			</key>
+			<one-to-many class="com.rigor.model.Category" />
+		</set>
+		<set name="category" table="category_tbl" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="DEPT_ID" not-null="true" />
+			</key>
+			<one-to-many class="com.rigor.model.Category" />
+		</set>
+	</class>
 </hibernate-mapping>

@@ -6,11 +6,15 @@
     <class name="com.rigor.model.Category" table="category_tbl">
         <id name="category_id" type="java.lang.String">
         </id>
-        <property name="dept_id" type="java.lang.String">
-        </property>
+         <many-to-one name="department" class="com.rigor.model.Department" fetch="select">
+            <column name="DEPT_ID" not-null="true" />
+        </many-to-one>
+        
         <property name="description" type="java.lang.String">
+        <column name="DESCRIPTION"></column>
         </property>
         <property name="status" type="int">
+        <column name="STATUS"></column>
         </property> 
     </class>
 </hibernate-mapping>

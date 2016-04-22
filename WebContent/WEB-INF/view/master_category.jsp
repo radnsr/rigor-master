@@ -32,10 +32,15 @@
 						name="category_id" ng-model="category.category_id"> </md-input-container>
 
 					<label style="color: rgb(204, 204, 204);">Department :</label>
-					<md-select ng-model="category.dept_id" name="dept_id" required placeholder="Select a department"> <md-option
-						ng-repeat="dept in dept_list" value="{{dept.id}}" class="md-primary">
-					{{dept.name}} </md-option> </md-select>
-					<div ng-messages="categoryForm.role.$error">
+					<md-select ng-model="category.dept_id" name="dept_id" required placeholder="Select a department">
+					<md-option ng-repeat="r in r_list" value="asd">123</md-option>
+					<md-option value="sa">1234</md-option>
+				<!--   <md-option
+						ng-repeat="r in r_list" value="{{r}}" class="md-primary">
+					{{r}} </md-option>
+					-->
+					 </md-select>
+					<div ng-messages="categoryForm.dept_id.$error">
 						<div ng-message="required"
 							style="font-size: 12px; line-height: 24px;">This is
 							required.</div>
@@ -43,16 +48,16 @@
 					<br />
 
 					<md-input-container class="md-block"> <label>
-						Category Name</label> <input required name="category_name"
-						ng-model="category.category_name">
+						Category Name</label> <input required name="description"
+						ng-model="category.description">
 					<div ng-messages="categoryForm.category_name.$error">
 						<div ng-message="required">This is required.</div>
 					</div>
 					</md-input-container>
 					<md-button type="button" ng-click="reset()">Reset</md-button>
 					<md-button class="md-primary md-default-theme"
-						ng-disabled="deptForm.$invalid">{{!dept.dept_id ?
-					'Add' : 'Update'}}</md-button>
+						ng-disabled="categoryForm.$invalid">{{!category.category_id
+					? 'Add' : 'Update'}}</md-button>
 				</form>
 				</md-card>
 				<md-card>
