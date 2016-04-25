@@ -78,8 +78,9 @@ App.controller('DeptCtrl', [
 			self.edit = function(id) {
 				console.log('id to be edited', id);
 				for (var i = 0; i < self.depts.length; i++) {
+
 					if (self.depts[i].dept_id == id) {
-						self.dept = angular.copy(self.depts[i]);
+						self.dept = angular.copy(self.depts[i]);		
 						break;
 					}
 				}

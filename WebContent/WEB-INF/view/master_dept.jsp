@@ -42,8 +42,12 @@
 				</md-card>
 				<md-card>
 				<div layout="row">
-					<md-input-container> <label>Search
-						here</label> <input ng-model="q" id="search"> </md-input-container>
+					<md-input-container>
+					 <label>Search ID</label> <input ng-model="search.dept_id" id="search">
+					 </md-input-container>
+					 <md-input-container>
+					 <label>Search Name</label> <input ng-model="search.dept_name" id="search">
+					  </md-input-container>
 
 					<md-input-container> <label>Items per
 						page</label> <input type="number" min="1" max="100" ng-model="pageSize">
@@ -55,15 +59,15 @@
 				<table class="md-table">
 					<thead>
 						<tr>
-							<th class="table-header">ID</th>
-							<th class="table-header">Department Name</th>
-							<th class="table-header">Status</th>
+							<th class="table-header"><a href ng-click="orderByField='dept_id'; reverseSort = !reverseSort">ID</a></th>
+							<th class="table-header"><a href ng-click="orderByField='dept_name'; reverseSort = !reverseSort">Department Name</a></th>
+							<th class="table-header"><a href ng-click="orderByField='status'; reverseSort = !reverseSort">Status</th>
 							<th class="table-header" colspan="2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr
-							dir-paginate="u in ctrl.depts | filter:q | orderBy: 'dept_id' | itemsPerPage:pageSize"
+							dir-paginate="u in ctrl.depts | filter:{dept_id: search.dept_id, dept_name: search.dept_name} | orderBy: orderByField:reverseSort | itemsPerPage:pageSize"
 							class="md-table-row">
 							<td><span ng-bind="u.dept_id"></span></td>
 							<td><span ng-bind="u.dept_name"></span></td>

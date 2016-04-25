@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 15, 2013 2:53:22 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.rigor.model.Department" table="dept_tbl">
+		<id name="dept_id" type="java.lang.String">
+		<column name="DEPT_ID"></column>
+		</id>
+		<property name="dept_name" type="java.lang.String"><column name="DEPT_NAME"></column>
+		</property>
+		<property name="status" type="int"><column name="STATUS"></column>
+		</property>
+	</class>
+</hibernate-mapping>

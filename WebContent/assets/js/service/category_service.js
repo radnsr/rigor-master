@@ -5,9 +5,19 @@ App.factory('CategoryService', [
 		function($http, $q) {
 
 			return {
-				create : function(data) {
+				departmentList : function() {
+				return $http
+				.get('http://localhost:8080/RigorProject/dept_list/')
+				.then(function(response) {
+					return response.data;
+				}, function(errResponse) {
+					console.error('Error while fetching depts');
+					return $q.reject(errResponse);
+				});
+	},
+				create : function(dept) {
 					return $http.post(
-							'http://localhost:8080/RigorProject/category/', data)
+							'http://localhost:8080/RigorProject/category/', dept)
 							.then(function(response) {
 								console.log(response);
 								return response.data;

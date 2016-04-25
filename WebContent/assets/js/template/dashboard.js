@@ -8,13 +8,22 @@ App.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
     {
       link : 'http://localhost:8080/RigorProject/dashboard',
       title: 'Dashboard',
-      icon: 'dashboard'
+      icon: 'home'
+    },
+    {
+    	link : 'http://localhost:8080/RigorProject/feedback_form',
+    	title: 'Feedback Form',
+    	icon: 'dashboard'
     },
     {
       link : 'http://localhost:8080/RigorProject/user',
       title: 'Users',
       icon: 'group'
-    },
+    }, {
+        link : 'http://localhost:8080/RigorProject/master_category',
+        title: 'Category Master',
+        icon: 'settings'
+      },
     {
       link : '',
       title: 'Messages',
@@ -28,8 +37,8 @@ App.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
       icon: 'delete'
     },
     {
-      link : 'showListBottomSheet($event)',
-      title: 'Settings',
+      link : 'http://localhost:8080/RigorProject/master_category',
+      title: 'Category Master',
       icon: 'settings'
     }
   ];

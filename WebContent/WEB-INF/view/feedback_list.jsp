@@ -15,48 +15,17 @@
 		<%@ include file="header.jsp"%>
 
 
-		<div ng-controller="CategoryCtrl" layout="row" layout-wrap>
+		<div ng-controller="FeedbackCtrl" layout="row" layout-wrap>
 
 			<div flex="25"></div>
 
 			<div flex="50">
 				<md-card>
 				<h2 style="text-align: center">
-					Category Master
+					Feedback List
 					<hr />
 				</h2>
-				<form ng-submit="submit()" name="categoryForm">
-					<md-input-container class="md-block"> <label>
-						Category ID</label> <input
-						type="{{!category.cat.category_id ? 'text' : 'text'}}" readonly
-						name="category_id" ng-model="category.cat.category_id"> </md-input-container>
-
-					<label style="color: rgb(204, 204, 204);">Department :</label>
-					<md-select ng-model="category.dept.dept_id" name="dept_id" required
-						placeholder="Select a department"> <md-option
-						ng-repeat="dept in dept_list" value="{{dept.dept_id}}"
-						class="md-primary"> {{dept.dept_name}} </md-option> </md-select>
-					<div ng-messages="categoryForm.dept_id.$error">
-						<div ng-message="required"
-							style="font-size: 12px; line-height: 24px;">This is
-							required.</div>
-					</div>
-					<br />
-
-					<md-input-container class="md-block"> <label>
-						Description</label> <input required name="category_name"
-						ng-model="category.cat.description">
-					<div ng-messages="categoryForm.category_name.$error">
-						<div ng-message="required">This is required.</div>
-					</div>
-					</md-input-container>
-					<md-button type="button" ng-click="reset()">Reset</md-button>
-					<md-button class="md-primary md-default-theme"
-						ng-disabled="categoryForm.$invalid">{{!category.cat.category_id ?
-					'Add' : 'Update'}}</md-button>
-				</form>
-				</md-card>
-				<md-card>
+							
 				<div layout="row">
 					<md-input-container> <label>Search
 						here</label> <input ng-model="q" id="search"> </md-input-container>
@@ -73,7 +42,7 @@
 						<tr>
 							<th class="table-header"><a href="#" ng-click="orderByField='u[0]'; reverseSort = !reverseSort">ID</a></th>
 							<th class="table-header"><a href="#" ng-click="orderByField='u[1]'; reverseSort = !reverseSort">Category Name</a></th>
-								<th class="table-header">Department Name</th>
+							<th class="table-header">Department Name</th>
 							<th class="table-header">Status</th>
 							<th class="table-header" colspan="2">Action</th>
 						</tr>
@@ -112,8 +81,8 @@
 
 
 	<script
-		src="<c:url value='/assets/js/controller/category_controller.js' />"></script>
-	<script src="<c:url value='/assets/js/service/category_service.js' />"></script>
+		src="<c:url value='/assets/js/controller/feedback_controller.js' />"></script>
+	<script src="<c:url value='/assets/js/service/feedback_service.js' />"></script>
 
 
 
