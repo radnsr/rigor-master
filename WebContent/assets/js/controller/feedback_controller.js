@@ -1,8 +1,8 @@
 'use strict';
 App.controller('FeedbackCtrl', [
 		'$scope',
-		'FeedbackService',
-		function($scope, FeedbackService) {
+		'FeedbackService','$mdDialog',
+		function($scope, FeedbackService,$mdDialog) {
 			$scope.feedback = {
 					fb:{feedback_id : '',feedback_type:'',description : ''},
 					cat:{category_id:''},
@@ -11,9 +11,10 @@ App.controller('FeedbackCtrl', [
 			};
 			$scope.type_list=["Suggestion","Complain"];
 			$scope.pageSize=3;
-			$scope.categories = [];
+		
 			$scope.dept_list=[];
 			$scope.cat_list=[];
+			$scope.feedback_list=[];
 			//-----------load Category options----------
 			
 			$scope.loadCatList=function(id){
@@ -39,7 +40,8 @@ App.controller('FeedbackCtrl', [
 			// ------------Fetch all feedback master data--------------
 			$scope.fetchAllData = function() {
 				FeedbackService.fetchAllData().then(function(d) {
-					$scope.categories = d;
+					
+					$scope.feedback_list = d;
 				}, function(errResponse) {
 					console.error('Error while fetching categories');
 				});
@@ -99,8 +101,8 @@ App.controller('FeedbackCtrl', [
 			$scope.edit = function(id) {
 				console.log('id to be edited', id);
 				for (var i = 0; i < $scope.categories.length; i++) {
-					if ($scope.categories[i][0] == id) {
-						var clone = angular.copy($scope.categories[i]);
+					if ($scope.feedback_list[i][0] == id) {
+						var clone = angular.copy($scope.feedback_list[i]);
 						
 						$scope.feedback = {
 								cat:{feedback_id : clone[0],description : clone[1]},
@@ -110,4 +112,28 @@ App.controller('FeedbackCtrl', [
 					}
 				}
 			};
+			
+		    $scope.showAlert = showAlert;
+		    function showAlert(description,feedback_id) {
+		        alert = $mdDialog.alert()
+		          .title('Feedback ID: ' +feedback_id)
+		          .content('Description: '+description)
+		          .ok('Close');
+
+		        $mdDialog
+		            .show( alert )
+		            .finally(function() {
+		              alert = undefined;
+		            });
+		      }
+
+		      // Close the specified dialog instance and resolve with 'finished' flag
+		      // Normally this is not needed, just use '$mdDialog.hide()' to close
+		      // the most recent dialog popup.
+
+		      function closeAlert() {
+		        $mdDialog.hide( alert, "finished" );
+		        alert = undefined;
+		      }
+
 } ]);

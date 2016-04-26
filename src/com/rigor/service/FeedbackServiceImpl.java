@@ -11,9 +11,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rigor.dao.FeedbackDAO;
 import com.rigor.model.Category;
 import com.rigor.model.Feedback;
 import com.rigor.util.HibernateUtilities;
@@ -22,130 +24,40 @@ import com.rigor.util.Methods;
 @Service("feedbackService")
 @Transactional
 public class FeedbackServiceImpl implements FeedbackService {
-	SessionFactory sessionFactory = null;
-
-	public FeedbackServiceImpl() {
-		sessionFactory = HibernateUtilities.getSessionFactory();
-
-	}
+	@Autowired
+	FeedbackDAO feedbackDao;
 
 	// ------------Save Feedback master data----------------------
 	public Feedback save(Feedback model) {
 
-		Feedback model_new = new Feedback();
-		Session session = sessionFactory.openSession();
+		Feedback feedback = feedbackDao.save(model);
 
-		try {
-			session.beginTransaction();
-			model_new = model;
-			Methods method = new Methods();
-			model_new.setFeedback_id(method.generateID(session, "F", "feedback_id", Feedback.class));
-			model_new.setStatus(1);
-			
-			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-		
-			model_new.setDate(date);
-			session.save(model_new);
-
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
-
-		return model_new;
+		return feedback;
 	}
 
 	// ------------Retrieve all feedback master data----------------------
 	public List<Feedback> getAllData() {
-		List<Feedback> list = null;
-		Session session = sessionFactory.openSession();
-
-		try {
-			session.beginTransaction();
-			list = session.createCriteria(Feedback.class).list();
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
+		List<Feedback> list = feedbackDao.getAllData();
 		return list;
 	}
-
-	
-
-
 
 	// ------------Deactivate Feedback master data----------------------
 	public void deactivate(String id) {
-		Session session = sessionFactory.openSession();
-		try {
-			session.beginTransaction();
 
-			Query query = session
-					.createQuery("UPDATE com.rigor.model.Feedback SET status=0 WHERE feedback_id = :feedback_id");
-			query.setParameter("feedback_id", id);
-			query.executeUpdate();
-
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
 	}
 
 	// ------------Activate Feedback master data----------------------
-	@Override
+	
 	public void activate(String id) {
-
-		Session session = sessionFactory.openSession();
-		try {
-			session.beginTransaction();
-
-			Query query = session
-					.createQuery("UPDATE com.rigor.model.Feedback SET status=1 WHERE feedback_id = :feedback_id");
-			query.setParameter("feedback_id", id);
-			query.executeUpdate();
-
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
 
 	}
 
-	@Override
+	
 	public List<Category> categoryList(String dept_id) {
-		
-		List<Category> list=null;
-		Session session = sessionFactory.openSession();
-		try {
-			session.beginTransaction();
-			
-			Criteria c = session.createCriteria(Category.class, "cat").add(Restrictions.eq("status", 1));
-			c.createAlias("cat.department", "dept");
-			c.add(Restrictions.eq("dept.dept_id", dept_id));
-			c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);	
-			list=c.list();
-			
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
-		
+		List<Category> list = feedbackDao.categoryList(dept_id);
+
 		return list;
+
 	}
 
 }

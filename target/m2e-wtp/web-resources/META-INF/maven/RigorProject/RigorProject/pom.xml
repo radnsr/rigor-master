@@ -30,6 +30,7 @@
 	<properties>
 		<springframework.version>4.2.0.RELEASE</springframework.version>
 		<jackson.version>2.5.3</jackson.version>
+		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
 	</properties>
 
 	<dependencies>
@@ -81,7 +82,19 @@
 			<version>1.54</version>
 		</dependency>
 
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
 
 	</dependencies>
+
 
 </project>

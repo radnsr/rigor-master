@@ -17,7 +17,7 @@
 			<span style="color: 003399; font-style: bold">${user_fresh.name}</span>,
 			<br /> This is your first login.Please enter new password to
 			activate your account.
-		</span> <input name="user_id" ng-model="user.user_id">
+		</span> <input ng-hide="true" name="user_id" ng-model="user.user_id">
 		<md-input-container> <label>Email</label> <label
 			style="color: black">${user_fresh.email}</label> </md-input-container>
 		<md-input-container class="md-block"> <label>Password</label>

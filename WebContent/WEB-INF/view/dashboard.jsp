@@ -28,12 +28,24 @@
 		</md-button> <md-grid-tile-footer>
 		<h3>Users</h3>
 		</md-grid-tile-footer> </md-grid-tile> 
+		
+			 
 			 <md-grid-tile class="green">
-		<md-button href="http://localhost:8080/RigorProject/master_dept"> <ng-md-icon
+		<md-button href="http://localhost:8080/RigorProject/feedback_form"> <ng-md-icon
 			icon="supervisor_account" style="fill: pink" size="100"></ng-md-icon>
 		</md-button> <md-grid-tile-footer>
-		<h3>Department Master Data</h3>
+		<h3>Feedback Form</h3>
 		</md-grid-tile-footer> </md-grid-tile> 
+		
+			 <md-grid-tile class="green">
+		<md-button href="http://localhost:8080/RigorProject/feedback_list"> <ng-md-icon
+			icon="supervisor_account" style="fill: pink" size="100"></ng-md-icon>
+		</md-button> <md-grid-tile-footer>
+		<h3>Feedback List</h3>
+		</md-grid-tile-footer> </md-grid-tile> 
+		
+		
+		
 		</md-grid-list> </ui-view> </md-content>
 	</div>
 	<%@include file="global_js.jsp"%>

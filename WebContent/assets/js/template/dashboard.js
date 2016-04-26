@@ -16,6 +16,11 @@ App.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
     	icon: 'dashboard'
     },
     {
+    	link : 'http://localhost:8080/RigorProject/feedback_list',
+    	title: 'Feedback List',
+    	icon: 'dashboard'
+    },
+    {
       link : 'http://localhost:8080/RigorProject/user',
       title: 'Users',
       icon: 'group'
@@ -23,24 +28,15 @@ App.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
         link : 'http://localhost:8080/RigorProject/master_category',
         title: 'Category Master',
         icon: 'settings'
-      },
-    {
-      link : '',
-      title: 'Messages',
-      icon: 'message'
-    }
+      }, {
+          link : 'http://localhost:8080/RigorProject/master_dept',
+          title: 'Department Master',
+          icon: 'settings'
+        },
+   
   ];
   $scope.admin = [
-    {
-      link : '',
-      title: 'Trash',
-      icon: 'delete'
-    },
-    {
-      link : 'http://localhost:8080/RigorProject/master_category',
-      title: 'Category Master',
-      icon: 'settings'
-    }
+   
   ];
   $scope.activity = [
       {

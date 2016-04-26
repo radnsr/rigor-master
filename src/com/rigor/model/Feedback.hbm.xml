@@ -19,7 +19,7 @@
 		</many-to-one>
 		<property name="user_id" type="java.lang.String">
 		</property>
-		<property name="date" type="java.sql.Timestamp">
+		<property name="date" type="java.sql.Date">
 		</property>
 		<property name="description" type="java.lang.String">
 		</property>

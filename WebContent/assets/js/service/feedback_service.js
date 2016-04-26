@@ -39,7 +39,7 @@ App.factory('FeedbackService', [
 				},
 				fetchAllData : function() {
 					return $http.get(
-							'http://localhost:8080/RigorProject/category/')
+							'http://localhost:8080/RigorProject/feedback/')
 							.then(function(response) {
 								return response.data;
 							}, function(errResponse) {

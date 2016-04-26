@@ -1,12 +1,11 @@
-package com.rigor.service;
+package com.rigor.dao;
 
 import java.util.List;
 
 import com.rigor.model.Category;
 import com.rigor.model.Feedback;
 
-public interface FeedbackService {
-
+public interface FeedbackDAO {
 	public Feedback save(Feedback model);
 
 	public List<Feedback> getAllData();
@@ -16,5 +15,4 @@ public interface FeedbackService {
 	void activate(String id);
 
 	public List<Category> categoryList(String dept_id);
-
 }
