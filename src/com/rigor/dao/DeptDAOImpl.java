@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rigor.constants.SQLQueries;
 import com.rigor.model.Department;
 import com.rigor.util.HibernateUtilities;
 import com.rigor.util.Methods;
@@ -45,6 +46,26 @@ public class DeptDAOImpl implements DeptDAO {
 			session.close();
 		}
 		return dept_new;
+	}
+	@Override
+	public Department getDept(String dept_id) {
+		Department dept = new Department();
+		Session session = sessionFactory.openSession();
+		
+		try {
+			session.beginTransaction();
+			
+			
+			dept=(Department) session.get(Department.class,dept_id);
+			
+			session.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return dept;
 	}
 
 	@Override
@@ -93,7 +114,7 @@ public class DeptDAOImpl implements DeptDAO {
 			session.beginTransaction();
 
 			Query query = session
-					.createQuery("UPDATE com.rigor.model.Department SET status=0 WHERE dept_id = :dept_id");
+					.createQuery(SQLQueries.DEPARTMENT_DEACTIVATION);
 			query.setParameter("dept_id", id);
 			query.executeUpdate();
 
@@ -114,7 +135,7 @@ public class DeptDAOImpl implements DeptDAO {
 			session.beginTransaction();
 
 			Query query = session
-					.createQuery("UPDATE com.rigor.model.Department SET status=1 WHERE dept_id = :dept_id");
+					.createQuery(SQLQueries.DEPARTMENT_DEACTIVATION);
 			query.setParameter("dept_id", id);
 			query.executeUpdate();
 

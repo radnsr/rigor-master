@@ -56,15 +56,9 @@ public class DeptServiceImpl implements DeptService {
 	@Override
 	public Department findById(String dept_id) {
 
-		List<Department> list = getAllDepts();
+		Department dept = deptDAO.getDept(dept_id);
 
-		for (Department dept : list) {
-			if (dept.getDept_id().equals(dept_id)) {
-				return dept;
-			}
-		}
-
-		return null;
+		return dept;
 	}
 
 	@Override

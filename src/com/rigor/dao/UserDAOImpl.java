@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import com.rigor.constants.SQLQueries;
 import com.rigor.model.User;
 import com.rigor.util.HibernateUtilities;
 import com.rigor.util.Methods;
@@ -87,7 +88,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.User SET status=0 WHERE user_id = :user_id");
+			Query query = session.createQuery(SQLQueries.USER_DEACTIVATION);
 			query.setParameter("user_id", id);
 			query.executeUpdate();
 
@@ -106,7 +107,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			session.beginTransaction();
 
-			Query query = session.createQuery("UPDATE com.rigor.model.User SET status=1 WHERE user_id = :user_id");
+			Query query = session.createQuery(SQLQueries.USER_ACTIVATION);
 			query.setParameter("user_id", id);
 			query.executeUpdate();
 
@@ -118,6 +119,26 @@ public class UserDAOImpl implements UserDAO{
 			session.close();
 		}
 	
+	}
+	@Override
+	public User get(String user_id) {
+		User user = new User();
+		Session session = sessionFactory.openSession();
+
+		try {
+			session.beginTransaction();
+			
+			user=(User) session.get(User.class,user_id);
+
+			session.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+
+		return user;
 	}
 
 	

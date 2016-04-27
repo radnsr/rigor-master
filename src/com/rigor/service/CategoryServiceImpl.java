@@ -48,14 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
 	// ------------get single category master data----------------------
 	public Category findById(String id) {
 
-		List<Category> list = catDao.getCategoryList();
-
-		for (Category model : list) {
-			if (model.getCategory_id().equals(id)) {
-				return model;
-			}
-		}
-		return null;
+		Category cat = catDao.get(id);
+		
+		return cat;
 	}
 
 	// ------------Deactivate Category master data----------------------

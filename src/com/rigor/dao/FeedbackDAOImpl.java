@@ -11,6 +11,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.rigor.constants.SQLQueries;
 import com.rigor.model.Category;
 import com.rigor.model.Feedback;
 import com.rigor.util.HibernateUtilities;
@@ -58,9 +59,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 
 		try {
 			session.beginTransaction();
-			String hql = "FROM com.rigor.model.Feedback  fb, com.rigor.model.Category  cat , com.rigor.model.Department  dept"
-					+ " WHERE fb.department.dept_id=dept.dept_id AND fb.category.category_id=cat.category_id";
-			Query query = session.createQuery(hql);
+			Query query = session.createQuery(SQLQueries.FEEDBACK_GETALL);
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (Exception ex) {
@@ -72,46 +71,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 		return list;
 	}
 
-	@Override
-	public void deactivate(String id) {
-		Session session = sessionFactory.openSession();
-		try {
-			session.beginTransaction();
 
-			Query query = session
-					.createQuery("UPDATE com.rigor.model.Feedback SET status=0 WHERE feedback_id = :feedback_id");
-			query.setParameter("feedback_id", id);
-			query.executeUpdate();
-
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
-	}
-
-	@Override
-	public void activate(String id) {
-		Session session = sessionFactory.openSession();
-		try {
-			session.beginTransaction();
-
-			Query query = session
-					.createQuery("UPDATE com.rigor.model.Feedback SET status=1 WHERE feedback_id = :feedback_id");
-			query.setParameter("feedback_id", id);
-			query.executeUpdate();
-
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			session.flush();
-			session.close();
-		}
-
-	}
 
 	@Override
 	public List<Category> categoryList(String dept_id) {

@@ -10,9 +10,5 @@ public interface FeedbackDAO {
 
 	public List<Feedback> getAllData();
 
-	void deactivate(String id);
-
-	void activate(String id);
-
 	public List<Category> categoryList(String dept_id);
 }
