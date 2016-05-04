@@ -8,6 +8,7 @@ public class User {
 	private String password;
 	private int status;
 	private String role;
+	private String dept_id;
 
 	public String getUser_id() {
 		return user_id;
@@ -83,6 +84,14 @@ public class User {
 	public String toString() {
 		return "User [user_id=" + user_id + ", Name=" + name + ", emp_no=" + emp_no + ", Email=" + email + ",password="
 				+ password + "]";
+	}
+
+	public String getDept_id() {
+		return dept_id;
+	}
+
+	public void setDept_id(String dept_id) {
+		this.dept_id = dept_id;
 	}
 
 }

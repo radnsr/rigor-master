@@ -28,7 +28,7 @@ public class UserController {
 	UserService service;
 
 	// -------------------Login authentication-------------
-	@RequestMapping(value = "/login2/", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/", method = RequestMethod.POST)
 	public ModelAndView login2(@RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password, @ModelAttribute(value = "user") User user,
 			HttpSession session) {

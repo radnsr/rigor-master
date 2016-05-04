@@ -38,58 +38,8 @@ public class Methods {
 			return generateId;
 		}
 	}
-	  public String SendMail(String to, String subject, String Msgbody) {
-	        String result = null;
-	        // Sender's email ID needs to be mentioned
-	        String from = "radnsr@yahoo.com";
-	        String pass = "0716338903";
-	    // Recipient's email ID needs to be mentioned.
-
-	        String host = "smtp.mail.yahoo.com";
-
-	        // Get system properties
-	        Properties properties = System.getProperties();
-	        // Setup mail server
-	        properties.put("mail.smtp.starttls.enable", "false");
-	        properties.put("mail.smtp.host", host);
-	        properties.put("mail.smtp.user", from);
-	        properties.put("mail.smtp.password", pass);
-	        properties.put("mail.smtp.port", "587");
-	        properties.put("mail.smtp.auth", "false");
-
-	        // Get the default Session object.
-	        javax.mail.Session session = javax.mail.Session.getDefaultInstance(properties);
-
-	        try {
-	            // Create a default MimeMessage object.
-	            MimeMessage message = new MimeMessage(session);
-
-	            // Set From: header field of the header.
-	            message.setFrom(new InternetAddress(from));
-
-	            // Set To: header field of the header.
-	            message.addRecipient(Message.RecipientType.TO,
-	                    new InternetAddress(to));
-
-	            // Set Subject: header field
-	            message.setSubject(subject);
-
-	            // Now set the actual message
-	            message.setText(Msgbody);
-
-	            // Send message
-	            Transport transport = session.getTransport("smtp");
-	            transport.connect(host, from, pass);
-	            transport.sendMessage(message, message.getAllRecipients());
-	            transport.close();
-	            System.out.println("Sent message successfully....");
-	            result = "success";
-	        } catch (MessagingException mex) {
-	            mex.printStackTrace();
-	        }
-	        return result;
-	    }
-	//generate random password for new user
+	  
+		//generate random password for new user
 	    public String RandomCode() {
 	        java.util.Random r = new java.util.Random();
 	        int i = 1, n = 0;
@@ -126,7 +76,7 @@ public class Methods {
 	            }
 	        }
 	        str = str + i;
-	        System.out.println("CODE: " + str);
+	        System.out.println("GENERATED CODE: " + str);
 	        return str;
 	    }
 

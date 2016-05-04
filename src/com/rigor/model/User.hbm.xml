@@ -10,6 +10,7 @@
 		<property name="email" type="java.lang.String" ><column name="EMAIL"></column></property>
 		<property name="password" type="java.lang.String" length="255"><column name="PASSWORD"></column></property>
 		<property name="role" type="java.lang.String" ><column name="ROLE"></column></property>
+		<property name="dept_id" type="java.lang.String" ><column name="DEPT_ID"></column></property>
 		<property name="emp_no" type="int"><column name="EMP_NO"></column></property>
 		<property name="status" type="int"><column name="STATUS"></column></property>
 

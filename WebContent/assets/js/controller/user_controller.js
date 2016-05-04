@@ -15,7 +15,15 @@ App.controller('UserCtrl', [
 		
 			$scope.pageSize=3;
 			$scope.users = [];
-			
+			$scope.dept_list=[];
+			//----------load Department options--------------
+			$scope.loadDeptsList=function(){
+				UserService.departmentList().then(function(data) {
+					$scope.dept_list = data;
+				}, function(errResponse) {
+					console.error('Error while fetching categories');
+				});
+			};
 			// ------------Fetch all user data--------------
 			$scope.fetchAllUsers = function() {
 				UserService.fetchAllUsers().then(function(d) {

@@ -45,6 +45,19 @@
 
 					</div>
 					</md-input-container>
+					
+					<label style="color: rgb(204, 204, 204);">Department :</label>
+					<md-select ng-model="user.dept_id" name="dept_id" required
+						placeholder="Select a department"> <md-option
+						ng-repeat="dept in dept_list" value="{{dept.dept_id}}"
+						class="md-primary"> {{dept.dept_name}} </md-option> </md-select>
+					<div ng-messages="userForm.dept_id.$error">
+						<div ng-message="required"
+							style="font-size: 12px; line-height: 24px;">This is
+							required.</div>
+					</div>
+					<br />
+					
 					<md-input-container class="md-block"> <label>
 						Email</label> <input required type="email" name="email"
 						ng-model="user.email" minlength="5" maxlength="50"
