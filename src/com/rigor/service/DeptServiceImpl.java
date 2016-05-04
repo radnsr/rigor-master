@@ -2,18 +2,12 @@ package com.rigor.service;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rigor.dao.DeptDAO;
-import com.rigor.model.Department;
-import com.rigor.util.HibernateUtilities;
-import com.rigor.util.Methods;;
+import com.rigor.model.Department;;
 
 @Service("deptService")
 @Transactional

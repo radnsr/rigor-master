@@ -20,7 +20,7 @@ App.factory('UserService', [
 							'http://localhost:8080/RigorProject/user/', user)
 							.then(function(response) {
 								console.log(response);
-								return response.data;
+								return response.status;
 							}, function(errResponse) {
 
 								console.error('Error while creating user');
@@ -41,7 +41,7 @@ App.factory('UserService', [
 					return $http.put(
 							'http://localhost:8080/RigorProject/user/' + id,
 							user).then(function(response) {
-						return response.data;
+						return response.status;
 					}, function(errResponse) {
 						console.error('Error while updating user');
 						return $q.reject(errResponse);
@@ -51,7 +51,7 @@ App.factory('UserService', [
 					return $http.get(
 							'http://localhost:8080/RigorProject/user_deactivate/'
 									+ id).then(function(response) {
-						return response.data;
+						return response.status;
 					}, function(errResponse) {
 						console.error('Error while fetching depts');
 						return $q.reject(errResponse);
@@ -62,7 +62,7 @@ App.factory('UserService', [
 					return $http.get(
 							'http://localhost:8080/RigorProject/user_activate/'
 									+ id).then(function(response) {
-						return response.data;
+						return response.status;
 					}, function(errResponse) {
 						console.error('Error while fetching depts');
 						return $q.reject(errResponse);

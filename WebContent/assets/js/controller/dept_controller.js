@@ -1,8 +1,8 @@
 'use strict';
 App.controller('DeptCtrl', [
 		'$scope',
-		'DeptService',
-		function($scope, DeptService) {
+		'DeptService','SweetAlert',
+		function($scope, DeptService,SweetAlert) {
 			var self = this;
 			self.dept = {
 				dept_id : '',
@@ -23,9 +23,15 @@ App.controller('DeptCtrl', [
 			// ------------Create new Department master data--------------
 			self.createDept = function(dept) {
 
-				DeptService.createDept(dept).then(self.fetchAllDepts,
+				DeptService.createDept(dept).then(function(status){
+					if(status==201){
+						SweetAlert.swal("Data Saved!", "You created a department!", "success");
+						self.fetchAllDepts();
+					}else{
+						SweetAlert.swal("Data not saved!", "Something went wrong!", "error");
+					}
+				},
 						function(errResponse) {
-
 							console.log(errResponse.data);
 						});
 			};
@@ -55,24 +61,77 @@ App.controller('DeptCtrl', [
 
 			// ------------Update department master data-------------
 			self.updateDept = function(dept, id) {
-				DeptService.updateDept(dept, id).then(self.fetchAllDepts,
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "You will be updated the department of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",
+					   confirmButtonText: "Yes, update it!",
+					   closeOnConfirm: false}, 
+					function(){ 
+				DeptService.updateDept(dept, id).then(function(status){
+					if(status==200){
+						SweetAlert.swal("Department updated!", "You updated a department of "+id, "success");
+						self.fetchAllDepts();
+					}else{
+						SweetAlert.swal("Department not updated!", "Please contact administrator!", "error");
+					}
+				},
 						function(errResponse) {
 							console.error('Error while updating User.');
 						});
+			   });
 			};
 			// ------------Deactvaite department master data-------------
 			self.deactivateDept = function(id) {
-				DeptService.deactivateDept(id).then(self.fetchAllDepts,
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "Your will be deactivate the department of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, deactivate it!",					 
+					   closeOnConfirm: false
+					   }, 
+					function(){ 
+				DeptService.deactivateDept(id).then(function(status){
+					if(status==200){
+						SweetAlert.swal("Department deactivated","You deactivated the department of "+id,"success");
+						self.fetchAllDepts();
+					}else{
+						SweetAlert.swal("Department is not deactivated","Please contact administrator","error");
+
+					}
+				},
 						function(errResponse) {
 					console.error('Error while deactivating dept.');
 				});
+			});
 			};
 			// ------------Deactvaite department master data-------------
 			self.activateDept = function(id) {
-				DeptService.activateDept(id).then(self.fetchAllDepts,
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "Your will be activate the department of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, activate it!",					 
+					   closeOnConfirm: false
+					   }, 
+					function(){ 
+				DeptService.activateDept(id).then(function(status){
+					if(status==200){
+						SweetAlert.swal("Department activated","You activated the department of "+id,"success");
+						self.fetchAllDepts();
+					}else{
+						SweetAlert.swal("Department is not activated","Please contact administrator!","error");
+
+					}
+				},
 						function(errResponse) {
 					console.error('Error while deactivating dept.');
 				});
+			});
 			};
 			// Edit the form in master_dept.jsp
 			self.edit = function(id) {

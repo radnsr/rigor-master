@@ -65,9 +65,9 @@
 					</div>
 					<br />
 
-					<md-input-container class="md-block"> <label>
-						Description</label> <textarea  md-maxlength="150" required name="feedback_description"
-						ng-model="feedback.fb.description"> </textarea>
+					<md-input-container > <label>
+						Description</label> <input columns="1"  md-maxlength="150" required name="feedback_description"
+						ng-model="feedback.fb.description" />
 					<div ng-messages="feedbackForm.feedback_description.$error">
 						<div ng-message="required">This is required.</div>
 					</div>

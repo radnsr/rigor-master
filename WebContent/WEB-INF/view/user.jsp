@@ -56,7 +56,7 @@
 							style="font-size: 12px; line-height: 24px;">This is
 							required.</div>
 					</div>
-					<br />
+				
 					
 					<md-input-container class="md-block"> <label>
 						Email</label> <input required type="email" name="email"
@@ -104,18 +104,18 @@
 				<table class="md-table">
 					<thead>
 						<tr>
-							<th class="table-header">User ID</th>
-							<th class="table-header">Name</th>
-							<th class="table-header">Employee No.</th>
-							<th class="table-header">Email</th>
-							<th class="table-header">Role</th>
-							<th class="table-header">Status</th>
+							<th class="table-header"><a href ng-click="orderByField='user_id'; reverseSort = !reverseSort">User ID</a></th>
+							<th class="table-header"><a href ng-click="orderByField='name'; reverseSort = !reverseSort">Name</th>
+							<th class="table-header"><a href ng-click="orderByField='emp_no'; reverseSort = !reverseSort">Employee No.</th>
+							<th class="table-header"><a href ng-click="orderByField='email'; reverseSort = !reverseSort">Email</th>
+							<th class="table-header"><a href ng-click="orderByField='role'; reverseSort = !reverseSort">Role</th>
+							<th class="table-header"><a href ng-click="orderByField='status'; reverseSort = !reverseSort">Status</th>
 							<th class="table-header" colspan="2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr
-							dir-paginate="u in users | filter:q | orderBy: 'user_id' | itemsPerPage:pageSize"
+							dir-paginate="u in users | filter:q | orderBy: orderByField:reverseSort | itemsPerPage:pageSize"
 							class="md-table-row">
 							<td><span ng-bind="u.user_id"></span></td>
 							<td><span ng-bind="u.name"></span></td>

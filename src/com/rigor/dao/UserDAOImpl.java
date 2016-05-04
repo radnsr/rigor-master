@@ -2,9 +2,11 @@ package com.rigor.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.rigor.constants.SQLQueries;
@@ -141,6 +143,27 @@ public class UserDAOImpl implements UserDAO{
 		return user;
 	}
 
-	
+	@Override
+	public User findByEmail(String email) {
+		User user = new User();
+		Session session = sessionFactory.openSession();
+
+		try {
+			session.beginTransaction();
+
+			Criteria crit = session.createCriteria(User.class);
+			crit.add(Restrictions.eq("email", email));
+			user = (User) crit.uniqueResult();
+
+			session.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+
+		return user;
+	}
 
 }

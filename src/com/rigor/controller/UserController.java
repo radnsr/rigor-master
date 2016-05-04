@@ -30,19 +30,21 @@ public class UserController {
 	// -------------------Login authentication-------------
 	@RequestMapping(value = "/login/", method = RequestMethod.POST)
 	public ModelAndView login2(@RequestParam(value = "email") String email,
-			@RequestParam(value = "password") String password, @ModelAttribute(value = "user") User user,
+			@RequestParam(value = "password") String password,
 			HttpSession session) {
 
 		User au_user = new User();
 		au_user.setEmail(email);
 		au_user.setPassword(password);
-		user = service.authenticate(au_user);
+		User user = service.authenticate(au_user);
+		System.out.println(user);
 		if (user == null) {
 			session.setAttribute("error", "Email or Password is wrong!!!");
 			return new ModelAndView("index");
-		}
-		
-		if(user.getStatus()==2 ){
+		}else if (user.getStatus() == 0) {
+			session.setAttribute("error", "This profile is deactivated by administrator");
+			return new ModelAndView("index");
+		}else if(user.getStatus()==2 ){
 			session.setAttribute("user_fresh", user);
 			return new ModelAndView("fresh_login");	
 		}
@@ -114,6 +116,7 @@ public class UserController {
 		currentModel.setEmail(model.getEmail());
 		currentModel.setRole(model.getRole());
 		currentModel.setEmp_no(model.getEmp_no());
+		currentModel.setDept_id(model.getDept_id());
 
 		service.update(currentModel);
 		return new ResponseEntity<User>(currentModel, HttpStatus.OK);

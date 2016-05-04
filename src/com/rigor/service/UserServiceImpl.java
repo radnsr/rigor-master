@@ -61,15 +61,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User authenticate(User user) {
-		List<User> list = getAllData();
+		User valid_user=findByEmail(user.getEmail());
+		
+			if (valid_user.getPassword().equals(user.getPassword())) {
 
-		for (User model : list) {
-			if (model.getEmail().equals(user.getEmail()) && model.getPassword().equals(user.getPassword())) {
-
-				return model;
+				return valid_user;
 			}
-		}
+		
 		return null;
+	}
+
+	@Override
+	public User get(String user_id) {
+		return userDao.get(user_id);
+	}
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.findByEmail(email);
 	}
 
 }

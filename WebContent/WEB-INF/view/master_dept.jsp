@@ -61,7 +61,7 @@
 						<tr>
 							<th class="table-header"><a href ng-click="orderByField='dept_id'; reverseSort = !reverseSort">ID</a></th>
 							<th class="table-header"><a href ng-click="orderByField='dept_name'; reverseSort = !reverseSort">Department Name</a></th>
-							<th class="table-header"><a href ng-click="orderByField='status'; reverseSort = !reverseSort">Status</th>
+							<th class="table-header"><a href ng-click="orderByField='status'; reverseSort = !reverseSort">Status</a></th>
 							<th class="table-header" colspan="2">Action</th>
 						</tr>
 					</thead>

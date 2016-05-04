@@ -64,11 +64,7 @@
 				password : '',
 			};
 			id = $scope.user.user_id;
-			$scope.update = function() {
-				console.log($scope.user);
-				$http.put('http://localhost:8080/RigorProject/user_password/'
-						+ id, $scope.user);
-			};
+			
 
 		});
 

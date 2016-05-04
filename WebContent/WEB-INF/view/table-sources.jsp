@@ -1,6 +1,6 @@
 <!-- --------Start-Page level Sources -->
 <link href="<c:url value="/assets/css/pagination2.css" />" rel="stylesheet" ></link>
-  <script data-require="jquery@*" data-semver="2.0.3" src=<c:url value='/assets/js/template/jquery-2.0.3.min.js' />"></script>
+  <script data-require="jquery@*" data-semver="2.0.3" src="<c:url value='/assets/js/template/jquery-2.0.3.min.js' />"></script>
   <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="<c:url value='/assets/js/template/bootstrap.min.js' />"></script>
  
 <!-- --------End-Page level Sources -->

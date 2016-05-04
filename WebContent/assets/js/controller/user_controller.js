@@ -1,8 +1,8 @@
 'use strict';
 App.controller('UserCtrl', [
 		'$scope',
-		'UserService',
-		function($scope, UserService) {
+		'UserService','SweetAlert',
+		function($scope, UserService,SweetAlert) {
 			$scope.user = {
 				user_id : '',
 				name : '',
@@ -24,6 +24,7 @@ App.controller('UserCtrl', [
 					console.error('Error while fetching categories');
 				});
 			};
+			$scope.loadDeptsList();
 			// ------------Fetch all user data--------------
 			$scope.fetchAllUsers = function() {
 				UserService.fetchAllUsers().then(function(d) {
@@ -36,11 +37,19 @@ App.controller('UserCtrl', [
 			// ------------Create new user data--------------
 			$scope.create = function(user) {
 
-				UserService.createUser(user).then($scope.fetchAllUsers,
-						function(errResponse) {
-
+				UserService.createUser(user).then(function(status){
+					
+					if(status==201){
+						SweetAlert.swal("Data Saved!", "You created a user!", "success");
+						$scope.fetchAllUsers();
+					}else{
+						SweetAlert.swal("Data not saved!", "Something went wrong!", "error");
+					}
+					
+				},function(errResponse) {
 							console.log(errResponse.data);
 						});
+				
 			};
 			$scope.fetchAllUsers();// execute the function when page loading
 			// ------------Submit form in user.jsp--------------
@@ -71,24 +80,80 @@ App.controller('UserCtrl', [
 
 			// ------------Update user data-------------
 			$scope.update = function(user, id) {
-				UserService.updateUser(user, id).then($scope.fetchAllUsers,
-						function(errResponse) {
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "You will be updated the user of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",
+					   confirmButtonText: "Yes, update it!",
+					   closeOnConfirm: false}, 
+					function(){ 
+							
+				UserService.updateUser(user, id).then(function(status){
+					if(status==200){
+						SweetAlert.swal("User updated!", "You updated a user of "+id, "success");
+						$scope.fetchAllUsers();
+					}else{
+						SweetAlert.swal("User not updated!", "User of "+id+" is not updated!", "error");
+					}
+				},function(errResponse) {
 							console.error('Error while updating User.');
 						});
+				});
 			};
 			// ------------Deactvaite user data-------------
 			$scope.deactivate = function(id) {
-				UserService.deactivate(id).then($scope.fetchAllUsers,
-						function(errResponse) {
-					console.error('Error while deactivating dept.');
-				});
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "Your will be deactivate the user of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, deactivate it!",					 
+					   closeOnConfirm: false
+					   }, 
+					function(){ 
+					   
+						   UserService.deactivate(id).then(function(status){
+								if(status==200){
+									SweetAlert.swal("User deactivated!", "You deactivated a user of "+id, "success");
+									$scope.fetchAllUsers();
+								}else{
+									SweetAlert.swal("User not deactivated", "User of "+id+" is not deactivated! ", "error");
+								}
+							},
+									function(errResponse) {
+								console.error('Error while deactivating dept.');
+							});					   
+					});
+				
+				
 			};
-			// ------------Deactvaite user data-------------
+			// ------------Actvaite user data-------------
 			$scope.activate = function(id) {
-				UserService.activate(id).then($scope.fetchAllUsers,
+				
+				SweetAlert.swal({
+					   title: "Are you sure?",
+					   text: "Your will be activate the user of "+id,
+					   type: "warning",
+					   showCancelButton: true,
+					   confirmButtonColor: "#DD6B55",
+					   confirmButtonText: "Yes, activate it!",
+					   closeOnConfirm: false}, 
+					function(){ 
+					  				
+				UserService.activate(id).then(function(status){
+					if(status==200){
+						SweetAlert.swal("User activated!", "You activated a user of "+id, "success");
+						$scope.fetchAllUsers();
+					}else{
+						SweetAlert.swal("User not activated", "Please contact administrator! ", "error");
+					}
+				},
 						function(errResponse) {
 					console.error('Error while deactivating dept.');
 				});
+					   });
 			};
 			// Edit the form in user.jsp
 			$scope.edit = function(id) {

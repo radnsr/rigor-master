@@ -35,7 +35,7 @@
 					<md-select ng-model="category.dept.dept_id" name="dept_id" required
 						placeholder="Select a department"> <md-option
 						ng-repeat="dept in dept_list" value="{{dept.dept_id}}"
-						class="md-primary"> {{dept.dept_name}} </md-option> </md-select>
+						> {{dept.dept_name}} </md-option> </md-select>
 					<div ng-messages="categoryForm.dept_id.$error">
 						<div ng-message="required"
 							style="font-size: 12px; line-height: 24px;">This is
@@ -71,8 +71,8 @@
 				<table class="md-table">
 					<thead>
 						<tr>
-							<th class="table-header"><a href="#" ng-click="orderByField='u[0]'; reverseSort = !reverseSort">ID</a></th>
-							<th class="table-header"><a href="#" ng-click="orderByField='u[1]'; reverseSort = !reverseSort">Category Name</a></th>
+							<th class="table-header"><a href ng-click="orderByField='u[0]'; reverseSort = !reverseSort">ID</a></th>
+							<th class="table-header"><a href ng-click="orderByField='u[1]'; reverseSort = !reverseSort">Category Name</a></th>
 								<th class="table-header">Department Name</th>
 							<th class="table-header">Status</th>
 							<th class="table-header" colspan="2">Action</th>

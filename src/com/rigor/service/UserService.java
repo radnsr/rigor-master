@@ -8,6 +8,8 @@ public interface UserService {
 
 	public User save(User model);
 
+	public User get(String user_id);
+
 	public List<User> getAllData();
 
 	void update(User model);
@@ -17,8 +19,8 @@ public interface UserService {
 	void deactivate(String id);
 
 	void activate(String id);
-	
-	public User authenticate(User user); 
-	
 
+	public User authenticate(User user);
+
+	public User findByEmail(String email);
 }
