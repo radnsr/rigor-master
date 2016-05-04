@@ -4,7 +4,7 @@ App.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
-  
+  user_dash($scope);
  
  	$scope.menu = [
     {

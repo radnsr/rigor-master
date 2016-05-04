@@ -51,12 +51,12 @@
 	</div>
 	<%@include file="global_js.jsp"%>
 <script type="text/javascript"> 
-App.controller('dashCtrl', function($scope) {
+ function user_dash($scope) {
 	
 	$scope.user_role = '${user.role }';
 	$scope.dept_id = '${user.dept_id }';
 	
-});</script>
+}</script>
 
 </body>
 </html>
