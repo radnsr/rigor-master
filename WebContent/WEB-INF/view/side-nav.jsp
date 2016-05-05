@@ -28,19 +28,29 @@
 	</div>
 	<div>${user.email }</div>
 </div>
-</md-toolbar> <md-list> <md-item ng-repeat="item in menu"> <md-button
-	href="{{item.link}}"> <md-item-content md-ink-ripple
-	layout="row" layout-align="start center">
+</md-toolbar>
+ <md-list> 
+ <md-item ng-repeat="item in menu"> 
+ <md-button href="{{item.link}}">
+  <md-item-content md-ink-ripple layout="row" layout-align="start center">
 <div class="inset">
 	<ng-md-icon icon="{{item.icon}}"></ng-md-icon>
 </div>
 <div class="inset">{{item.title}}</div>
-</md-item-content> </md-button> </md-item> <md-divider></md-divider> <md-subheader>Management</md-subheader> <md-item
-	ng-repeat="item in admin"> <a> <md-item-content
-		md-ink-ripple layout="row" layout-align="start center">
-	<div class="inset">
-		<ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-	</div>
-	<div class="inset">{{item.title}}</div>
-	</md-item-content>
-</a> </md-item> </md-list> </md-sidenav>
+</md-item-content>
+ </md-button>
+  </md-item> 
+  <md-divider></md-divider>
+ <md-subheader>Master Data Management</md-subheader>
+ <md-item ng-repeat="item in admin"> 
+ <md-button href="{{item.link}}">
+  <md-item-content md-ink-ripple layout="row" layout-align="start center">
+<div class="inset">
+	<ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+</div>
+<div class="inset">{{item.title}}</div>
+</md-item-content>
+ </md-button>
+  </md-item>
+
+ </md-list> </md-sidenav>
