@@ -11,4 +11,6 @@ public interface FeedbackDAO {
 	public List<Feedback> getAllData();
 
 	public List<Category> categoryList(String dept_id);
+	
+	public List<Feedback> getDataByDeptId(String dept_id);
 }

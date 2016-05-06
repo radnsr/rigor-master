@@ -1,16 +1,7 @@
 package com.rigor.service;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rigor.dao.FeedbackDAO;
 import com.rigor.model.Category;
 import com.rigor.model.Feedback;
-import com.rigor.util.HibernateUtilities;
-import com.rigor.util.Methods;
 
 @Service("feedbackService")
 @Transactional
@@ -58,6 +47,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 		return list;
 
+	}
+
+	@Override
+	public List<Feedback> getDataByDeptId(String dept_id) {
+		return feedbackDao.getDataByDeptId(dept_id);
 	}
 
 }

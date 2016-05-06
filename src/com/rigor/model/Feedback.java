@@ -8,7 +8,7 @@ private String feedback_id;
 private Date date;
 private String feedback_type;
 private String user_id;
-private Department department;
+
 private Category category;
 private String description;
 private int status;
@@ -46,13 +46,7 @@ public void setFeedback_type(String feedback_type) {
 	this.feedback_type = feedback_type;
 }
 
-public Department getDepartment() {
-	return department;
-}
 
-public void setDepartment(Department department) {
-	this.department = department;
-}
 
 public Category getCategory() {
 	return category;

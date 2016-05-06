@@ -17,4 +17,6 @@ public interface FeedbackService {
 
 	public List<Category> categoryList(String dept_id);
 
+	List<Feedback> getDataByDeptId(String dept_id);
+
 }

@@ -32,7 +32,7 @@
 		</md-grid-tile-footer> </md-grid-tile> 
 	
 			 
-			 <md-grid-tile class="green">
+			 <md-grid-tile class="green" ng-if="user_role=='Administrator'">
 		<md-button  aria-label href="http://localhost:8080/RigorProject/feedback_form"> <ng-md-icon
 			icon="supervisor_account" style="fill: pink" size="100"></ng-md-icon>
 		</md-button> <md-grid-tile-footer>
@@ -64,13 +64,7 @@
 		</md-grid-list> </ui-view> </md-content>
 	</div>
 	<%@include file="global_js.jsp"%>
-<script type="text/javascript"> 
- var user_dash= function ($scope) {
-	
-	$scope.user_role = '${user.role }';
-	$scope.dept_id = '${user.dept_id }';
-	
-}</script>
+
 
 </body>
 </html>

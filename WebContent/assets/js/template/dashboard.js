@@ -1,4 +1,3 @@
-
 App
 		.controller(
 				'AppCtrl',
@@ -11,8 +10,8 @@ App
 							$scope.toggleSidenav = function(menuId) {
 								$mdSidenav(menuId).toggle();
 							};
-							
 
+							user_dash($scope);
 							$scope.menu = [
 									{
 										link : 'http://localhost:8080/RigorProject/dashboard',

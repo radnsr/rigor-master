@@ -18,10 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rigor.model.Feedback;
-import com.rigor.model.User;
 import com.rigor.model.Category;
-import com.rigor.model.Department;
+import com.rigor.model.Feedback;
 import com.rigor.service.FeedbackService;
 
 @RestController
@@ -41,14 +39,11 @@ public class FeedbackController {
 
 			feedback = mapper.convertValue(node.get("fb"), Feedback.class);
 			Category category = mapper.convertValue(node.get("cat"), Category.class);
-			Department dept = mapper.convertValue(node.get("dept"), Department.class);
 			//User user = mapper.convertValue(node.get("user"), User.class);
 			feedback.setCategory(category);
-			feedback.setDepartment(dept);
 			//feedback.set(user);
 			//System.out.println("user:>" + user);
 			System.out.println("model_new:>" + feedback);
-			System.out.println("dept:>" + dept);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,6 +64,17 @@ public class FeedbackController {
 	@RequestMapping(value = "/feedback/", method = RequestMethod.GET)
 	public ResponseEntity<List<Feedback>> listAllData() {
 		List<Feedback> list = service.getAllData();
+		if (list.isEmpty()) {
+			return new ResponseEntity<List<Feedback>>(HttpStatus.NO_CONTENT);
+			// You many decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<List<Feedback>>(list, HttpStatus.OK);
+	}
+	// -------------------Retrieve All Data-----------------------
+	
+	@RequestMapping(value = "/feedback/{dept_id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Feedback>> listDataByDept_id(@PathVariable("dept_id") String dept_id) {
+		List<Feedback> list = service.getDataByDeptId(dept_id);
 		if (list.isEmpty()) {
 			return new ResponseEntity<List<Feedback>>(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND

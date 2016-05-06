@@ -8,8 +8,10 @@ public class SQLQueries {
 	public static final String USER_DEACTIVATION = "UPDATE com.rigor.model.User SET status=0 WHERE user_id = :user_id";
 	
 	//FEEDBACK related queries
-	public static final String FEEDBACK_GETALL = "FROM com.rigor.model.Feedback  fb, com.rigor.model.Category  cat , com.rigor.model.Department  dept"
-			+ " WHERE fb.department.dept_id=dept.dept_id AND fb.category.category_id=cat.category_id";
+	public static final String FEEDBACK_GETALL = "SELECT fb FROM com.rigor.model.Feedback  fb, fb.category  cat ";
+	
+	public static final String FEEDBACK_GET_BY_DEPT = "FROM com.rigor.model.Feedback  fb INNER JOIN fb.category cat"
+			+ " WHERE cat.dept_id='D0001'";
 	
 	
 	//Department related queries

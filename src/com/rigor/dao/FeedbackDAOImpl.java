@@ -16,6 +16,7 @@ import com.rigor.model.Category;
 import com.rigor.model.Feedback;
 import com.rigor.util.HibernateUtilities;
 import com.rigor.util.Methods;
+
 @Repository("feedbackDao")
 public class FeedbackDAOImpl implements FeedbackDAO {
 	SessionFactory sessionFactory = null;
@@ -71,7 +72,48 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 		return list;
 	}
 
+	@Override
+	public List<Feedback> getDataByDeptId(String dept_id) {
+		List list = null;
+		Session session = sessionFactory.openSession();
 
+		try {
+
+			session.beginTransaction();
+			/*
+			 * Query query =
+			 * session.createQuery(SQLQueries.FEEDBACK_GET_BY_DEPT); list =
+			 * query.setParameter("dept_id", dept_id).list(); //list =
+			 * query.list();
+			 */
+
+			/*
+			 * Criteria c = session.createCriteria(Feedback.class, "fb");
+			 * //c.createAlias("fb.department", "dept");
+			 * 
+			 * //c.add(Restrictions.eq("fb.category.category_id",
+			 * "cat.category_id"));
+			 * c.add(Restrictions.eq("fb.department.dept_id", dept_id));
+			 * c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY
+			 * ); list = c.list();
+			 */
+
+			Criteria c = session.createCriteria(Feedback.class, "fb");
+			c.createAlias("fb.department", "dept"); // inner join by default
+			c.createAlias("fb.category", "cat"); // inner join by default
+			// c.createAlias("role.contact", "contact");
+			c.add(Restrictions.eq("dept.dept_id", "D0001"));
+			list = c.list();
+
+			session.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return list;
+	}
 
 	@Override
 	public List<Category> categoryList(String dept_id) {

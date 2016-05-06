@@ -19,3 +19,11 @@
 		<script src="<c:url value='/assets/js/template/dashboard.js' />"></script>
 		<script src="<c:url value='/assets/js/template/dirPaginate.js' />"></script>
 	
+<script type="text/javascript"> 
+ var user_dash= function ($scope) {
+	
+	$scope.user_role = '${user.role }';
+	$scope.dept_id = '${user.dept_id }';
+	
+	
+}</script>
